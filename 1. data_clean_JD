@@ -1,1 +1,23 @@
+import pandas as pd
 
+# 读取CSV文件
+input_file = '/Users/jellychen1/Downloads/【小米Redmi K60】商品评价.csv'
+output_file = '/Users/jellychen1/Downloads/【小米Redmi K60】商品评价-处理.csv'
+column_name = '评价'  # 替换为实际的列名
+
+df = pd.read_csv(input_file,encoding='utf-8-sig')
+
+# 定义要删除的模板词列表(可自主添加）
+template_words = ['外形外观：', '屏幕音效：', '拍照效果：', '运行速度：', '待机时间：', '其他特色：','基本信息：']
+
+# 处理文本中的模板词
+def remove_template_words(text):
+    for template_word in template_words:
+        text = text.replace(template_word, '')
+    return text
+
+# 在指定列上应用处理函数
+df[column_name] = df[column_name].apply(remove_template_words)
+
+# 将处理后的数据写回到CSV文件
+df.to_csv(output_file, encoding='utf-8-sig',index=False)
