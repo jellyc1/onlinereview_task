@@ -2,7 +2,7 @@ import pandas as pd
 from snownlp import SnowNLP
 
 # 读取CSV文件
-df = pd.read_csv('your_file.csv', encoding = 'utf-sig-8')
+df = pd.read_csv('your_file.csv', encoding = 'utf-8-sig')
 
 # 定义函数进行情感分析
 def analyze_sentiment(text):
@@ -16,4 +16,4 @@ df['sentiment_score'] = df['target_column'].apply(analyze_sentiment)
 df['sentiment'] = df['sentiment_score'].apply(lambda score: '积极' if score > 0.5 else '消极' if score < 0.5 else '中性')
 
 # 保存结果到新文件
-df.to_csv('result_with_sentiment.csv', index=False, encoding = 'utf-sig-8')
+df.to_csv('result_with_sentiment.csv', index=False, encoding = 'utf-8-sig')
